@@ -171,12 +171,24 @@ public class CalendarParserImpl implements CalendarParser {
                      * !Component.BEGIN.equals(tokeniser.sval) &&
                      */!Component.END.equals(tokeniser.sval)) {
                 // check for timezones observances or vevent/vtodo alarms..
-                if (Component.BEGIN.equals(tokeniser.sval)) {
-                    componentParser.parse(tokeniser, in, handler);
-                }
-                else {
-                    propertyParser.parse(tokeniser, in, handler);
-                }
+            	try {
+            		if (Component.BEGIN.equals(tokeniser.sval)) {
+            			componentParser.parse(tokeniser, in, handler);
+            		}
+            		else {
+            			propertyParser.parse(tokeniser, in, handler);
+            		}
+            	} catch(ParserException pe) {
+            		log.warn("Exception during parsing calendar, we continue anyway ; ParserException message is : " + pe.getMessage());
+            	} catch(Exception e) {
+            			log.warn("Exception during parsing calendar, we continue anyway ; Exception message is : " + e.getMessage());
+            		if(e.getCause() != null && e.getCause() instanceof ParserException) {
+            			log.warn("The ParserException cause message is : " + e.getCause().getMessage());
+        			} 
+			if(e.getMessage()==null) {
+			    throw new RuntimeException("Error during parsing calendar ... TODO VB - maj de l'api ...", e);
+			}
+		}          	
                 absorbWhitespace(tokeniser, in);
                 // assertToken(tokeniser, StreamTokenizer.TT_WORD);
             }
