@@ -9,11 +9,25 @@
 	<groupId>org.mnode.ical4j</groupId>
 	<artifactId>ical4j</artifactId>
 	<name>iCal4j</name>
-	<version>1.0.5-SNAPSHOT</version>
+	<version>1.0.5-esup-patch-1-SNAPSHOT</version>
 	<description>
 		A Java library for reading and writing iCalendar (*.ics) files
 	</description>
 	<url>http://ical4j.sourceforge.net</url>
+
+
+	<distributionManagement>
+	    <repository>
+	      <id>esup</id>
+	      <name>esup releases</name>
+	      <url>https://mvn.esup-portail.org/content/repositories/releases</url>
+	    </repository>
+	    <snapshotRepository>
+	      <id>esup</id>
+	      <name>esup snapshots</name>
+	      <url>https://mvn.esup-portail.org/content/repositories/snapshots</url>
+	    </snapshotRepository>
+	</distributionManagement>
 
 	<issueManagement>
 		<system>SourceForge.net</system>
